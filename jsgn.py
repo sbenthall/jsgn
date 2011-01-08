@@ -5,16 +5,19 @@ import os
 class DirectedGraph(object):
 
     def __init__(self, filename):
-        self.nodes = {}
-        self.edges = {}
         if filename and os.path.isfile(filename):
             f = open(filename,"r")
             self.graph = json.loads(f.read())
+        else:
+            self.graph = {'nodes': {}, 'edges': {} }
         self.filename = filename
 
+        # convenience attrs
+        self.nodes = self.graph['nodes']
+        self.edges = self.graph['edges']
+
+
     def dump(self):
-        edges
-        
         return json.dumps(self.graph)
         
     def save(self):
