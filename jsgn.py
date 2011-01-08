@@ -21,14 +21,15 @@ class Graph():
         if graph_dict is not None:
             self.structure = graph_dict.get('structure',{})
             self.nodes = graph_dict.get('nodes',{})
-        
-    def dump(self):
-        return json.dumps(
-            {
+
+    def as_dict(self):
+        return {
                 'structure' : self.structure,
                 'nodes' : self.nodes
                 }
-            )
+
+    def dump(self):
+        return json.dumps(self.as_dict())
 
     def add_node(self, node, metadata={}):
         '''
