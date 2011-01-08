@@ -36,3 +36,4 @@ assert(node4.add_edge('node1').from_node.metadata == node4.metadata)
 node4.get_edge('node1').metadata['edge-key'] = 41
 assert(graph1.get_edge('node4','node1').metadata['edge-key'] == 41)
 
+assert(len(node1.children()) == 3)

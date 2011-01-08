@@ -70,6 +70,10 @@ class Node():
         self.edges[to_node] = metadata
         return self.get_edge(to_node)
 
+    def children(self):
+        ## should return an iterator
+        return [Node(node,self.graph) for node in self.edges.keys()]
+
 class Edge():
     from_node = None
     to_node = None                
