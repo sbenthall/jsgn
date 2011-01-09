@@ -23,6 +23,8 @@ class DirectedGraph(object):
         self.nodes = self.graph['nodes']
         self.edges = self.graph['edges']
 
+    ### functions for loading/saving
+
     def load(self, jsongraph):
         self.graph = json.loads(jsongraph)
 
@@ -35,6 +37,26 @@ class DirectedGraph(object):
             file.write(self.dump())
             file.close()
 
+    ### functions for updating graph
+
+    def update(self, graph):
+        """update the entire graph"""
+        if isinstance(graph, DirectedGraph):
+            graph = graph.graph
+
+        # update graph metadata
+        graphmetadata = dict([(i,j) for i, j in graph.items()
+                              if i not in ['nodes', 'edges']])
+        self.graph.update(graphmetadata)
+
+        # update nodes
+        for node, metadata in graph.get('nodes', {}):
+            # TODO: assert metadata is a dict
+            self.add_node(node, metadata)
+
+        # update edges
+        
+
     def add_node(self, node, **metadata):
         self.nodes.setdefault(node, {}).update(metadata)
 
@@ -42,6 +64,9 @@ class DirectedGraph(object):
         self.edges.setdefault(node1, {}).setdefault(node2, {}).update(metadata)
         self.add_node(node1)
         self.add_node(node2)
+
+
+    ### functions for graph access
 
     def __iter__(self):
         """iterate over edges"""

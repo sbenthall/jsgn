@@ -7,6 +7,7 @@ prior to running these tests or you will get nothing but failures.
 
 The obligatory imports::
 
+    >>> import urllib
     >>> import urllib2
     >>> try:
     ...     import json
@@ -18,3 +19,7 @@ You start off with an empty graph::
     >>> f = urllib2.urlopen('http://localhost:8080/')
     >>> output = json.loads(f.read())
     >>> output = {'nodes': {}, 'edges': {}}
+
+Let's put something in it::
+
+    >>> graph = {'edges': {'foo': {'bar': {'metadata': 'value'}}}}
