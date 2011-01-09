@@ -1,9 +1,15 @@
 from setuptools import setup, find_packages
 
 try:
-    description = file('README.txt').read()
+    description = file('README').read()
 except IOError: 
     description = ''
+
+dependencies = []
+try:
+    import json
+except:
+    dependencies.append('simplejson')
 
 version = "0.0"
 
@@ -19,9 +25,7 @@ setup(name='jsgn',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
-      install_requires=[
-          # -*- Extra requirements: -*-
-      ],
+      install_requires=dependencies,
       entry_points="""
       # -*- Entry points: -*-
       """,
