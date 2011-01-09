@@ -1,0 +1,20 @@
+Test Web API
+============
+
+This doctest requires the server already be started.  Please run
+``python $(python -c 'import jsgn.web; print jsgn.web.__file__' ``
+prior to running these tests or you will get nothing but failures.
+
+The obligatory imports::
+
+    >>> import urllib2
+    >>> try:
+    ...     import json
+    ... except ImportError:
+    ...     import simplejson as json
+
+You start off with an empty graph::
+
+    >>> f = urllib2.urlopen('http://localhost:8080/')
+    >>> output = json.loads(f.read())
+    >>> output = {'nodes': {}, 'edges': {}}
