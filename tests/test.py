@@ -13,7 +13,7 @@ def run_tests():
     tests =  [ test for test in os.listdir(directory)
                if test.endswith('.txt') ]
     for test in tests:
-        doctest.testfile(test, extraglobs=extraglobs, raise_on_error=True)
+        doctest.testfile(test, extraglobs=extraglobs)
 
 if __name__ == '__main__':
     run_tests()
