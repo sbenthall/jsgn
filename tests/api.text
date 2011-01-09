@@ -1,0 +1,11 @@
+Test JSGN API
+=============
+
+The obligatory imports:
+
+    >>> from jsgn import DirectedGraph
+
+Run some tests.  This test will fail, please fix it:
+
+    >>> assert True == False
+
