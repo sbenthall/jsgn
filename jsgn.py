@@ -1,6 +1,8 @@
-import json
+try:
+    import json
+except ImportError:
+    import simplejson as json
 import os
-
 
 class DirectedGraph(object):
 
