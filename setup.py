@@ -21,7 +21,7 @@ setup(name='jsgn',
       author='',
       author_email='',
       url='',
-      license='See http://www.python.org/2.6/license.html'
+      license='GPL',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
