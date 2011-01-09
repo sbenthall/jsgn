@@ -1,15 +1,20 @@
+"""
+basic directed graph API
+"""
+
+import os
 try:
     import json
 except ImportError:
     import simplejson as json
-import os
+
 
 class DirectedGraph(object):
 
     def __init__(self, filename=None):
         if filename and os.path.isfile(filename):
             f = open(filename,"r")
-            self.graph = json.loads(f.read())
+            self.load(f.read())
         else:
             self.graph = {'nodes': {}, 'edges': {} }
         self.filename = filename
@@ -18,6 +23,8 @@ class DirectedGraph(object):
         self.nodes = self.graph['nodes']
         self.edges = self.graph['edges']
 
+    def load(self, jsongraph):
+        self.graph = json.loads(jsongraph)
 
     def dump(self):
         return json.dumps(self.graph)

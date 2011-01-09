@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+"""
+basic web handler for JSGN
+"""
+
 try:
   import json
 except ImportError:
@@ -26,14 +32,25 @@ class JSGNHandler(object):
       path = path.split('/')
       if path == ['']:
         path = []
-      target = types.get(len(path), None)
-      if target is None:
+      type = types.get(len(path), None)
+      if type is None:
         res = exc.HTTPNotFound()
+        # TODO set content type, body
+        return res(environ, start_response)      
       if request.headers['Content-Type'] == 'application/json':
         import pdb; pdb.set_trace()
+        self.graph.save()
       else:
         import pdb; pdb.set_trace()
+        self.graph.save()
         res = Response(content_type=content_type,
                        body=self.graph.dump())
 
     return res(environ, start_response)
+
+if __name__ == '__main__':
+  import tempfile
+  from wsgiref import simple_server
+  app = JSGNHandler(tempfile.mktemp())
+  server = simple_server.make_server(host='0.0.0.0', port=8080, app=app)
+  server.serve_forever()
