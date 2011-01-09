@@ -6,7 +6,7 @@ import os
 
 class DirectedGraph(object):
 
-    def __init__(self, filename):
+    def __init__(self, filename=None):
         if filename and os.path.isfile(filename):
             f = open(filename,"r")
             self.graph = json.loads(f.read())
@@ -37,12 +37,14 @@ class DirectedGraph(object):
         self.add_node(node2)
 
     def __iter__(self):
+        """iterate over edges"""
         for node1, value in self.edges.items():
             for node2, metadata in value.items():
                 yield node1, node2, metadata
 
 if __name__ == '__main__':
-    graph = DirectedGraph(None)
+    # illustrate basic functionality
+    graph = DirectedGraph()
     graph.add_edge('foo', 'bar', **{'count': 2})
     graph.add_edge('foo', 'fleem', **{'count': 7})
     graph.add_node('fleem', description='a serious fleem')

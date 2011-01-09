@@ -5,7 +5,21 @@ The obligatory imports:
 
     >>> from jsgn import DirectedGraph
 
-Run some tests.  This test will fail, please fix it:
+Basic tests:
 
-    >>> assert True == False
+    >>> graph=DirectedGraph(None)
+    >>> graph.add_edge('foo', 'bar', **{'count': 2})
+    >>> graph.add_edge('foo', 'fleem', **{'count': 7})
+    >>> graph.add_node('fleem', description='a serious fleem')
+    >>> graph.edges == {'foo': {'bar': {'count': 2}, 'fleem': {'count': 7} } }
+    True
+    >>> graph.nodes['fleem']['description'] == 'a serious fleem'
+    True
+    >>> count = sum([sum([j.get('count', 0) for j in i.values()]) for i in graph.edges.values()])
+    >>> count
+    9
 
+Iterate over edges:
+
+    >>> sum([j[2].get('count', 0) for j in graph])
+    9
