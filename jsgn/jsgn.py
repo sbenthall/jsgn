@@ -55,7 +55,7 @@ class DirectedGraph(object):
             self.add_node(node, metadata)
 
         # update edges
-        
+        # TODO
 
     def add_node(self, node, **metadata):
         self.nodes.setdefault(node, {}).update(metadata)

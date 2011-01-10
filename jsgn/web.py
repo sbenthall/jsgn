@@ -41,6 +41,8 @@ class JSGNHandler(object):
         import pdb; pdb.set_trace()
         self.graph.save()
       else:
+        # normal POST requests can only update metadata on
+        # an object
         import pdb; pdb.set_trace()
         self.graph.save()
         res = Response(content_type=content_type,
