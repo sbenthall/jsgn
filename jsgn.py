@@ -1,15 +1,3 @@
-import json
-import os.path
-
-def open_graph(file_name):
-    file = open(file_name,"r")
-    graph_dict = json.loads(file.read())
-    return Graph(graph_dict)
-
-def save_graph(file_name):
-    file = open(self.file_name,"w")
-    file.write(self.dump())
-    file.close()
     
 class Graph():
     ''' A dict that contains the edge structure indexed by nodes'''

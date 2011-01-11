@@ -8,6 +8,16 @@ try:
 except ImportError:
     import simplejson as json
 
+def open_graph(file_name):
+    file = open(file_name,"r")
+    graph_dict = json.loads(file.read())
+    return Graph(graph_dict)
+
+def save_graph(graph, file_name):
+    file = open(file_name,"w")
+    file.write(graph.dump())
+    file.close()
+
 
 class DirectedGraph(object):
 
