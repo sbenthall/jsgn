@@ -75,7 +75,7 @@ class DirectedGraph(object):
         # update edges
         # TODO
 
-    def add_node(self, node, metadata):
+    def add_node(self, node, **metadata):
         self.nodes.setdefault(node, {}).update(metadata)
         self.edges.setdefault(node, {})
         return self.get_node(node)
@@ -152,9 +152,8 @@ if __name__ == '__main__':
     graph = DirectedGraph()
     graph.add_edge('foo', 'bar', **{'count': 2})
     graph.add_edge('foo', 'fleem', **{'count': 7})
-    graph.add_node('fleem', {'description' :'a serious fleem'})
-
-    assert graph.edges == {'foo': {'bar': {'count': 2}, 'fleem': {'count': 7} } }
+    graph.add_node('fleem', **{'description' :'a serious fleem'})
+    assert graph.edges == {'fleem': {},'foo': {'bar': {'count': 2}, 'fleem': {'count': 7} }, 'bar' :{} }
     assert graph.nodes['fleem']['description'] == 'a serious fleem'
 
     count = sum([sum([j.get('count', 0) for j in i.values()]) for i in graph.edges.values()])

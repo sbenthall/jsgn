@@ -28,7 +28,7 @@ assert(node1.metadata['node-key'] == 1)
 
 assert(node1.get_edge('node2').metadata == graph1.get_edge('node1','node2').metadata)
 
-node4 = graph1.add_node('node4', {'node-key': 4})
+node4 = graph1.add_node('node4', **{'node-key': 4})
 assert(node1.add_edge('node4', {'edge-key':14}).to_node.metadata['node-key'] == 4)
 
 assert(node4.add_edge('node1').from_node.metadata == node4.metadata)
