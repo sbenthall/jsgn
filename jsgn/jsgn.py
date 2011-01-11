@@ -33,6 +33,9 @@ class DirectedGraph(object):
 
     ### functions for loading/saving
 
+    def as_dict(self):
+        return self.graph
+
     def load(self, jsongraph):
         self.graph = json.loads(jsongraph)
 
