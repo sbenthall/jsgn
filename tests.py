@@ -2,7 +2,7 @@ from jsgn import *
 import json
 
 jsgn_dict = {
-    'structure' : {
+    'edges' : {
         'node1' : {
             'node2' : { 'edge-key': 12},
             'node3' : { 'edge-key': 13}
