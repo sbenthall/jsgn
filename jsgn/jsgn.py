@@ -42,7 +42,7 @@ class DirectedGraph(object):
     def dump(self):
         return json.dumps(self.graph)
         
-    def save(self):
+    def save(self, filename):
         if self.filename:
             file = open(self.filename,"w")
             file.write(self.dump())
