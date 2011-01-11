@@ -70,6 +70,7 @@ class DirectedGraph(object):
 
     def add_node(self, node, **metadata):
         self.nodes.setdefault(node, {}).update(metadata)
+        return self.get_node(node)
 
     def add_edge(self, node1, node2, **metadata):
         self.edges.setdefault(node1, {}).setdefault(node2, {}).update(metadata)
@@ -77,13 +78,66 @@ class DirectedGraph(object):
         self.add_node(node2)
 
 
+    ### Object Graphical Mapping
+                
+    def get_node(self, node):
+        return Node(node, self)
+
+    def get_edge(self, from_node, to_node):
+        return Edge(from_node, to_node, self)
+
+
     ### functions for graph access
+
+           
+    def has_node(self, node):
+        return self.nodes.get(node) is not None
 
     def __iter__(self):
         """iterate over edges"""
         for node1, value in self.edges.items():
             for node2, metadata in value.items():
                 yield node1, node2, metadata
+
+
+class Node():
+    metadata = {}
+    edges = {}
+    graph = None
+    id = ""
+
+    def __init__(self, node, graph):
+        self.edges = graph.graph['edges'][node]
+        self.metadata = graph.graph['nodes'][node]
+        self.graph = graph
+        self.id = node
+
+    def get_edge(self, to_node):
+        return Edge(self.id, to_node,self.graph)
+
+    def add_edge(self, to_node, metadata={}):
+        if not self.graph.has_node(to_node):
+            self.graph.add_node(to_node)
+        self.edges[to_node] = metadata
+        return self.get_edge(to_node)
+
+    def children(self):
+        ## should return an iterator
+        return [Node(node,self.graph) for node in self.edges.keys()]
+
+class Edge():
+    from_node = None
+    to_node = None                
+    metadata = {}
+    graph = None
+
+    def __init__(self, from_node, to_node, graph):
+        self.from_node = graph.get_node(from_node)
+        self.to_node = graph.get_node(to_node)
+        self.metadata = graph.edges[from_node][to_node]
+        self.graph = graph
+
+
 
 if __name__ == '__main__':
     # illustrate basic functionality
