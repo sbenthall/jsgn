@@ -1,1 +1,14 @@
 A python library around JSGN : JavaScript Graph Notation, an experiment with notations for graphs in JSON.
+
+Example:
+
+{ 'nodes' : { 'node1' : {metadata},
+              ...
+            }
+  'edges' : { 'node1' : { 'node2' : {metadata},
+                          'node3' : ...
+                          ...
+                        },
+              ...
+            }
+}
