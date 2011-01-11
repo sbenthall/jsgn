@@ -21,14 +21,12 @@ def save_graph(graph, file_name):
 
 class DirectedGraph(object):
 
-    def __init__(self, filename=None):
-        if filename and os.path.isfile(filename):
-            f = open(filename,"r")
-            self.load(f.read())
-        else:
-            self.graph = {'nodes': {}, 'edges': {} }
-        self.filename = filename
+    graph = {}
 
+    def __init__(self, graph_dict=None):
+        if graph_dict is not None:
+            self.edges = graph_dict.get('edges',{})
+            self.nodes = graph_dict.get('nodes',{})
         # convenience attrs
         self.nodes = self.graph['nodes']
         self.edges = self.graph['edges']
