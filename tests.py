@@ -19,7 +19,7 @@ jsgn_dict = {
         }
     }
 
-graph1 = Graph(jsgn_dict)
+graph1 = DirectedGraph(jsgn_dict)
 
 
 node1 = graph1.get_node('node1')

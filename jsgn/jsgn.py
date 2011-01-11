@@ -20,11 +20,14 @@ def save_graph(graph, file_name):
 
 
 class DirectedGraph(object):
-
-    graph = {}
+    graph = {
+        'nodes' : {},
+        'edges' : {}
+        }
 
     def __init__(self, graph_dict=None):
         if graph_dict is not None:
+            self.graph = graph_dict
             self.edges = graph_dict.get('edges',{})
             self.nodes = graph_dict.get('nodes',{})
         # convenience attrs
@@ -37,7 +40,11 @@ class DirectedGraph(object):
         return self.graph
 
     def load(self, jsongraph):
+        ## should homogenize 'load' and 'save' to
+        ## be file or dict loading
         self.graph = json.loads(jsongraph)
+        self.nodes = self.graph['nodes']
+        self.edges = self.graph['edges']
 
     def dump(self):
         return json.dumps(self.graph)
@@ -68,8 +75,9 @@ class DirectedGraph(object):
         # update edges
         # TODO
 
-    def add_node(self, node, **metadata):
+    def add_node(self, node, metadata):
         self.nodes.setdefault(node, {}).update(metadata)
+        self.edges.setdefault(node, {})
         return self.get_node(node)
 
     def add_edge(self, node1, node2, **metadata):
@@ -107,8 +115,8 @@ class Node():
     id = ""
 
     def __init__(self, node, graph):
-        self.edges = graph.graph['edges'][node]
-        self.metadata = graph.graph['nodes'][node]
+        self.edges = graph.edges[node]
+        self.metadata = graph.nodes[node]
         self.graph = graph
         self.id = node
 
@@ -144,7 +152,7 @@ if __name__ == '__main__':
     graph = DirectedGraph()
     graph.add_edge('foo', 'bar', **{'count': 2})
     graph.add_edge('foo', 'fleem', **{'count': 7})
-    graph.add_node('fleem', description='a serious fleem')
+    graph.add_node('fleem', {'description' :'a serious fleem'})
 
     assert graph.edges == {'foo': {'bar': {'count': 2}, 'fleem': {'count': 7} } }
     assert graph.nodes['fleem']['description'] == 'a serious fleem'
