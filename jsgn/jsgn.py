@@ -48,12 +48,6 @@ class DirectedGraph(object):
 
     def dump(self):
         return json.dumps(self.graph)
-        
-    def save(self, filename):
-        if self.filename:
-            file = open(self.filename,"w")
-            file.write(self.dump())
-            file.close()
 
     ### functions for updating graph
 
