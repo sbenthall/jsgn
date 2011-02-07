@@ -78,6 +78,7 @@ class DirectedGraph(object):
         self.edges.setdefault(node1, {}).setdefault(node2, {}).update(metadata)
         self.add_node(node1)
         self.add_node(node2)
+        return self.get_edge(node1, node2)
 
 
     ### Object Graphical Mapping
