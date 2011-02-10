@@ -89,6 +89,9 @@ class DirectedGraph(object):
     def get_edge(self, from_node, to_node):
         return Edge(from_node, to_node, self)
 
+    def get_nodes(self):
+        for node in self.nodes.keys():
+            yield self.get_node(node)
 
     ### functions for graph access
 
