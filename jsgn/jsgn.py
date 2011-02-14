@@ -97,7 +97,7 @@ class DirectedGraph(object):
     def remove_edge(self, from_node, to_node):
         metadata = {}
         if from_node in self.edges:
-            metadata self.edges[from_node].pop(to_node, {})
+            metadata = self.edges[from_node].pop(to_node, {})
         return {}
 
     ### Object Graphical Mapping
