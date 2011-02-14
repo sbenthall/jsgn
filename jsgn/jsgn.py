@@ -81,6 +81,19 @@ class DirectedGraph(object):
         return self.get_edge(node1, node2)
 
 
+    ### Removal
+
+    ## this removes node and all edges to and from it
+    ## another removal method or option might
+    ## remove a node and relink edges to maintain
+    ## connectivity
+    def remove_node(self, node):
+        metadata = self.nodes.pop(node)
+        self.edges.pop(node)
+        for from_node, to_nodes in self.edges.items():
+            to_nodes.pop(node)
+        return metadata
+
     ### Object Graphical Mapping
                 
     def get_node(self, node):
