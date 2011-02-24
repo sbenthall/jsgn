@@ -140,7 +140,7 @@ class Node():
     def get_edge(self, to_node):
         return Edge(self.id, to_node,self.graph)
 
-    def add_edge(self, to_node, metadata={}):
+    def add_edge(self, to_node, **metadata):
         if not self.graph.has_node(to_node):
             self.graph.add_node(to_node)
         self.edges[to_node] = metadata
